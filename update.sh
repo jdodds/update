@@ -11,6 +11,7 @@ function error
 
 function update_emacs
 {
+    info emacs updating
     cd $HOME/workspace/emacs
     bzr pull
     (make && sudo make install && info emacs done) || (make bootstrap && make && sudo make install && info emacs done) || error emacs
@@ -18,27 +19,31 @@ function update_emacs
 
 function update_system
 {
+    info system updating
     sudo pacman -Syu --noconfirm --logfile $HOME/log/update_system.log && info system updated || error "system update"
 }
 
 function update_pear
 {
-    pear clear-cache
-    pear update-channels 2> $HOME/log/pear.log
-    pear upgrade 2> $HOME/log/pear.log
+    info pear updating
+    sudo /usr/bin/pear clear-cache
+    sudo /usr/bin/pear update-channels 2> $HOME/log/pear.log
+    sudo /usr/bin/pear upgrade 2> $HOME/log/pear.log
+    info pear done
 }
 
 function update_org_feeds
 {
+    info org_feeds updating
     emacs --batch --eval '(load "~/.emacs")' -f 'org-feed-update-all'
+    info org_feeds done
 }
 
 function update_all
 {
-    update_system
-    update_pear
-    update_emacs
-    update_org_feeds
+    for f in $(functions | grep -Eo '^(update_[_a-zA-Z]+)'); do
+	[[ $f != "update_all" ]] && $f;
+    done
 }
 
 funcs=$(functions | grep -Eo '^update_([_a-zA-Z]+) ' | sed -e 's/update_/  /')
