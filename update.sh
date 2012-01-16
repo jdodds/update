@@ -39,14 +39,19 @@ function update_org_feeds
     info org_feeds done
 }
 
+function find_functions
+{
+    functions | grep -Eo '^(update_[_a-zA-Z]+)'
+}
+
 function update_all
 {
-    for f in $(functions | grep -Eo '^(update_[_a-zA-Z]+)'); do
+    for f in $(find_functions) ; do
 	[[ $f != "update_all" ]] && $f;
     done
 }
 
-funcs=$(functions | grep -Eo '^update_([_a-zA-Z]+) ' | sed -e 's/update_/  /')
+funcs=$(find_functions | sed -e 's/update_/  /')
 
 target="update_$1"
 if [[ $(whence -w $target) != "$target: none" ]] ; then
