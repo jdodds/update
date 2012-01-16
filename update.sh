@@ -46,13 +46,15 @@ function update_all
     done
 }
 
-funcs=$(find_functions | sed -e 's/update_/  /')
-
-target="update_$1"
-if [[ $(whence -w $target) != "$target: none" ]] ; then
-    $target
-else
+function invalid_function
+{
+    funcs=$(find_functions | sed -e 's/update_/  /')
     echo "No update function for $1\n"
     echo "Valid functions are:"
     echo "$funcs"
-fi
+}
+
+target="update_$1"
+[[ $(whence -w $target) != "$target: none" ]] && \
+    $target || \
+    invalid_function $1
