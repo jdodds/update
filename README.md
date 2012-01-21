@@ -25,17 +25,17 @@ whatever you want. Here's the function I use to update emacs' source:
     function update_emacs
     {
         cd ~/workspace/emacs
-	bzr pull
-	(make && sudo make install) || (make bootstrap && make && sudo make install)
+        bzr pull
+        (make && sudo make install) || (make bootstrap && make && sudo make install)
     }
-    
+
 Easy-peasy, if perhaps dangerously simple.
 
 Caveats
 =======
 
 Function-files are sourced, so if for some inane reason you let someone
-malicious write them they could do malicious things. 
+malicious write them they could do malicious things.
 
 I've only tested and used this with zsh. It almost definitely won't work with
 anything else, although that's probably just a matter of the way that the update
@@ -46,4 +46,3 @@ Bug Reports and Contributions
 =============================
 
 Please do. On github.
-
