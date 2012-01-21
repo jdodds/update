@@ -64,6 +64,10 @@ function update_moodbar
     exec 9<&-
 }
 
+function update_amarok_tags
+{
+    amarok_afttagger -r /media/shared/Music/Music/
+}
 
 function find_functions
 {
