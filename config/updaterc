@@ -7,5 +7,5 @@ function info
 # $1 is the update being run
 function error
 {
-    notify-send -i error "$1" failed!
+    notify-send -i error update "$1 failed!"
 }

@@ -24,7 +24,7 @@ function update_all
 {
     for f in $(find_auto_update_functions) ; do
 	info update "running $f"
-	[[ $f != "update_all" ]] && $f && info update "$f done";
+	[[ $f != "update_all" ]] && $f && info update "$f done" || error "$f";
     done
 }
 
