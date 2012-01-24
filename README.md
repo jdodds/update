@@ -31,6 +31,11 @@ whatever you want. Here's the function I use to update emacs' source:
 
 Easy-peasy, if perhaps dangerously simple.
 
+Occasionally, you may run into something that you'd like to have an update
+definition for, but do not want to run when `update all` is called. To mark a
+function as blacklisted, prefix it's name with `no_auto_`. This is configurable
+by setting `blacklist_token` to whatever you'd like the prefix to be in your `updaterc`
+
 Caveats
 =======
 
