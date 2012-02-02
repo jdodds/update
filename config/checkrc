@@ -1,0 +1,11 @@
+# $1 is the update being run, $2 is the message
+function info
+{
+    notify-send -i info "$1" "$2"
+}
+
+# $1 is the update being run
+function error
+{
+    notify-send -i error update "$1 failed!"
+}
